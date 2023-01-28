@@ -9,11 +9,11 @@ const NavBar = () => {
                 <NavLink to='/' >Home</NavLink>
             </Button>
             <Button variant='outlined'>
-                <NavLink to='/add'>Record Income/Expenses</NavLink>
+                <NavLink to='add'>Record Income/Expenses</NavLink>
             </Button>
 
             <Button variant='outlined'>
-                <NavLink to='/summary' >Monthly Summary</NavLink>
+                <NavLink to='summary' >Monthly Summary</NavLink>
             </Button>
             
         </Stack>

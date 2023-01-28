@@ -11,7 +11,7 @@ import AddIncomeExpenses from './components/add-income-expenses/AddIncomeExpense
 const App = () => {
   return (
     <Stack spacing={2}>
-      <Typography variant='h5'>Money Manager - Better way to keep track of your money</Typography>
+      <Typography variant='h5'>Money Manager - Better way to keep track your money</Typography>
       <NavBar />
 
       <Routes>

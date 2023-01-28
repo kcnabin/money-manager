@@ -1,23 +1,24 @@
-import { Box, ButtonGroup, Button } from '@mui/material'
+import { Box, ButtonGroup, Button, Typography } from '@mui/material'
 
-const DisplaySubCategory = ({ expenses, setExpenses, expensesList }) => {
+const DisplaySubCategory = ({ mainCategory, subCategories, categoryHandler }) => {
   return (
     <>
     <Box>
+      <Typography variant='body1'>Select Sub-Category</Typography>
       <ButtonGroup
         sx={{flexWrap: 'wrap'}}
-        onClick={e => setExpenses(e.target.value)}
+        onClick={e => categoryHandler(e.target.value)}
         className='all-sub-cat'
       >
         {
-          expensesList.map((expense, i) => {
+          subCategories.map((eachCategory, i) => {
             return (
               <Button 
                 key={i} 
-                value={expense} 
-                variant={expense === expenses ? 'contained' : 'outlined'}
+                value={eachCategory} 
+                variant={eachCategory === mainCategory ? 'contained' : 'outlined'}
               >
-                {expense}
+                {eachCategory}
               </Button>)
           })
         }

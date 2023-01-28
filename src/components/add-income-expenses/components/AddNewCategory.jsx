@@ -16,11 +16,14 @@ import { useState } from 'react'
 const AddNewCategory = ({ 
   showAddCategory, 
   setShowAddCategory, 
-  setExpensesList, 
-  expensesList }) => {
+  expensesList,
+  setExpensesList,
+  incomeList,
+  setIncomeList
+ }) => {
   return (
     <>
-    <Box width='150px'>
+    <Box width='225px'>
       <Button 
         variant='contained' 
         color='secondary'
@@ -33,9 +36,11 @@ const AddNewCategory = ({
     {
       showAddCategory
         ? <AddCategory 
-            setShowAddCategory={setShowAddCategory} 
+            setShowAddCategory={setShowAddCategory}
+            expensesList={expensesList}
             setExpensesList={setExpensesList} 
-            expensesList={expensesList} 
+            incomeList={incomeList}
+            setIncomeList={setIncomeList}
           /> 
         : ''
     }
@@ -43,7 +48,13 @@ const AddNewCategory = ({
   )
 }
 
-const AddCategory = ({ setShowAddCategory, setExpensesList, expensesList }) => {
+const AddCategory = ({ 
+  setShowAddCategory,
+  expensesList,
+  setExpensesList,
+  incomeList,
+  setIncomeList
+}) => {
   // console.log(expensesList)
   const [newCategory, setNewCategory ] = useState('')
   const [newCategoryType, setNewCategoryType] = useState('')
@@ -55,10 +66,16 @@ const AddCategory = ({ setShowAddCategory, setExpensesList, expensesList }) => {
   const addNewCategory = (e) => {
     e.preventDefault()
     if (newCategory === '' || newCategoryType === '') {
-      alert('Name can not be empty')
+      alert('Must select both main category and subcategory')
       return
     }
-    setExpensesList(expensesList.concat(newCategory))
+
+    if (newCategoryType === 'income') {
+      setIncomeList(incomeList.concat(newCategory))
+    } else {
+      setExpensesList(expensesList.concat(newCategory))
+    }
+    
     alert(`${newCategory} added!`)
 
     setShowAddCategory(false)
@@ -90,7 +107,7 @@ const AddCategory = ({ setShowAddCategory, setExpensesList, expensesList }) => {
           </RadioGroup>
 
           <TextField
-            label='Add new category'
+            label='Add Sub-Category Name'
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
             InputProps={{
