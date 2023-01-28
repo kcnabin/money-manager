@@ -23,13 +23,13 @@ const AddNewCategory = ({
  }) => {
   return (
     <>
-    <Box width='225px'>
+    <Box width='250px'>
       <Button 
         variant='contained' 
         color='secondary'
         fullWidth
         onClick={() => setShowAddCategory(!showAddCategory)}
-      > {showAddCategory ? `Hide 'Add Category'` : 'Add Category'}
+      > {showAddCategory ? `Hide 'Add new category'` : 'Add new category'}
       </Button>
     </Box>
 
