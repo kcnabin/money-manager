@@ -2,17 +2,15 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { Typography, Stack } from '@mui/material'
-import { useState } from 'react'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 import NavBar from './components/nav-bar/NavBar'
 import Home from './components/home/Home'
 import Summary from './components/summary/Summary'
 import AddIncomeExpenses from './components/add-income-expenses/AddIncomeExpenses'
-import { LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 const App = () => {
-  const [addedRecords, setAddedRecords] = useState([])
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -24,16 +22,13 @@ const App = () => {
       <NavBar />
 
       <Routes>
+        <Route index element={<Home />} />
         <Route path='/' element={<Home />} />
         <Route 
           path='add' 
-          element={
-            <AddIncomeExpenses 
-              addedRecords={addedRecords} 
-              setAddedRecords={setAddedRecords} 
-            />} 
+          element={<AddIncomeExpenses />} 
         />
-        <Route path='summary' element={<Summary addedRecords={addedRecords} />} />
+        <Route path='summary' element={<Summary />} />
       </Routes>
 
     </Stack>

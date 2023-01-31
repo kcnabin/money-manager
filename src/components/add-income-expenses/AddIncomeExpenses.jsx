@@ -7,64 +7,53 @@ import DisplaySubCategory from './components/DisplaySubCategory'
 import AddNewCategory from './components/AddNewCategory';
 import AddAmount from './components/AddAmount'
 import PickDate from './components/PickDate'
+import { useDispatch } from 'react-redux'
+import { addIncomeRecords, addExpensesRecords } from '../../features/records/transactionsSlice'
 
-const AddIncomeExpenses = ({ addedRecords, setAddedRecords }) => {
-  const [category, setCategory] = useState('')
-  const [expenses, setExpenses] = useState('')
-  const [income, setIncome] = useState('')
-  const [amount, setAmount] = useState('')
+const AddIncomeExpenses = () => {
+  const dispatch = useDispatch()
+
   const [selectedDate, setSelectedDate] = useState(null)
-  
+  const [category, setCategory] = useState('')
+  const [subCategory, setSubCategory] = useState('')
+  const [amount, setAmount] = useState('')
+
+  const [displaySubCategory, setDisplaySubCategory] = useState(false) 
   const [showAddCategory, setShowAddCategory] = useState(false)
 
-  const arrayOfExpensesList = ['Rent', 'Food', 'Travel', 'Medicine', 'Emergency', 'Vehicle', 'Insurance', 'Installment']
-  const arrayOfIncomeList = ['Salary', 'Interest', 'Daily Allowances', 'Others']
-
-  const [expensesList, setExpensesList] = useState(arrayOfExpensesList)
-  const [incomeList, setIncomeList] = useState(arrayOfIncomeList)
+  const resetSelection = () => {
+    setSelectedDate(null)
+    setCategory('')
+    setSubCategory('')
+    setAmount('')
+  }
 
   const addRecord = e => {
     e.preventDefault()
 
-    if ( (!category || !amount || !selectedDate ) || 
-         ((category === 'income' && income === '') || (category === 'expenses' && expenses === ''))
-    ){
+    if (!category || !subCategory || !amount || !selectedDate) {
       alert('Please add all options')
       return
     }
 
-    setAddedRecords(addedRecords.concat({
+    const newRecord = {
+      dateAdded: selectedDate,
       category,
-      subCategory: category === 'income' ? income : expenses,
-      amount,
-      date: selectedDate
-    }))
-
-    alert('Record Added')
-    console.log(addedRecords)
-    setCategory('')
-    setAmount('')
-    setSelectedDate(null)
-
-  }
-
-  const renderSubCategory = () => {
-    if (category === 'expenses') {
-      return (
-        <DisplaySubCategory 
-          mainCategory={expenses} 
-          subCategories={expensesList} 
-          categoryHandler={setExpenses}
-        />)
-    } else if (category === 'income') {
-      return (
-        <DisplaySubCategory 
-          mainCategory={income} 
-          subCategories={incomeList} 
-          categoryHandler={setIncome}
-        />)
+      subCategory,
+      amount
     }
-    return
+
+    if (category === 'income') {
+      dispatch(addIncomeRecords(newRecord))
+    } else if (category === 'expenses') {
+      dispatch(addExpensesRecords(newRecord))
+    } else {
+      alert('Error adding new record')
+      return
+    }
+
+    alert(' new Record Added')
+    resetSelection()
   }
 
   return (
@@ -74,9 +63,20 @@ const AddIncomeExpenses = ({ addedRecords, setAddedRecords }) => {
           <Stack spacing={2}>
           <PickDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
 
-          <SelectMainCategory category={category} setCategory={setCategory} />
+          <SelectMainCategory 
+            category={category} 
+            setCategory={setCategory} 
+            setDisplaySubCategory={setDisplaySubCategory}
+          />
+
           {
-            renderSubCategory()
+            displaySubCategory
+              ? <DisplaySubCategory
+                  mainCategory={category}
+                  subCategory={subCategory}
+                  setSubCategory={setSubCategory}
+                />
+              : ""
           }
 
           <AddAmount amount={amount} setAmount={setAmount} />
@@ -93,11 +93,7 @@ const AddIncomeExpenses = ({ addedRecords, setAddedRecords }) => {
 
         <AddNewCategory 
           showAddCategory={showAddCategory} 
-          setShowAddCategory={setShowAddCategory} 
-          expensesList={expensesList}
-          setExpensesList={setExpensesList}
-          incomeList={incomeList}
-          setIncomeList={setIncomeList}
+          setShowAddCategory={setShowAddCategory}
         />
       </Stack>
   )

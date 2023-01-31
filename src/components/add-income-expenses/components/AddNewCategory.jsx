@@ -12,17 +12,16 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+import { addToIncomeList } from "../../../features/records/transactionsSlice";
+import { addToExpensesList } from "../../../features/records/transactionsSlice";
+
 const AddNewCategory = ({ 
-  showAddCategory, 
-  setShowAddCategory, 
-  expensesList,
-  setExpensesList,
-  incomeList,
-  setIncomeList
+  showAddCategory,
+  setShowAddCategory
  }) => {
   return (
     <>
-    
       <Button 
         variant='contained' 
         color='secondary'
@@ -30,16 +29,10 @@ const AddNewCategory = ({
         onClick={() => setShowAddCategory(!showAddCategory)}
       > {showAddCategory ? `Hide 'Add new category'` : 'Add new category'}
       </Button>
-    
-
     {
       showAddCategory
         ? <AddCategory 
             setShowAddCategory={setShowAddCategory}
-            expensesList={expensesList}
-            setExpensesList={setExpensesList} 
-            incomeList={incomeList}
-            setIncomeList={setIncomeList}
             fullWidth
           /> 
         : ''
@@ -48,13 +41,8 @@ const AddNewCategory = ({
   )
 }
 
-const AddCategory = ({ 
-  setShowAddCategory,
-  expensesList,
-  setExpensesList,
-  incomeList,
-  setIncomeList
-}) => {
+const AddCategory = ({ setShowAddCategory }) => {
+  const dispatch = useDispatch()
   
   const [newCategory, setNewCategory ] = useState('')
   const [newCategoryType, setNewCategoryType] = useState('')
@@ -63,7 +51,7 @@ const AddCategory = ({
     setNewCategoryType(e.target.value)
   }
 
-  const addNewCategory = (e) => {
+  const addNewCategory = e => {
     e.preventDefault()
     if (newCategory === '' || newCategoryType === '') {
       alert('Must select both main category and subcategory')
@@ -71,9 +59,9 @@ const AddCategory = ({
     }
 
     if (newCategoryType === 'income') {
-      setIncomeList(incomeList.concat(newCategory))
+      dispatch(addToIncomeList(newCategory))
     } else {
-      setExpensesList(expensesList.concat(newCategory))
+      dispatch(addToExpensesList(newCategory))
     }
     
     alert(`${newCategory} added!`)
@@ -91,7 +79,7 @@ const AddCategory = ({
         <RadioGroup 
           value={newCategoryType} 
           onChange={handleChange} 
-          name='new category' 
+          name='new-category' 
           row
         >
           <FormControlLabel 
@@ -109,8 +97,7 @@ const AddCategory = ({
         <TextField
           label='Add Sub-Category'
           value={newCategory}
-          sx={{fullWidth: '500px'}}
-          onChange={(e) => setNewCategory(e.target.value)}
+          onChange={e => setNewCategory(e.target.value)}
           InputProps={{
             endAdornment: <InputAdornment 
                 position="end">
