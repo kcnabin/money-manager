@@ -1,9 +1,8 @@
-import { Box, ButtonGroup, Button, Typography } from '@mui/material'
+import { Stack, ButtonGroup, Button, Typography } from '@mui/material'
 
 const DisplaySubCategory = ({ mainCategory, subCategories, categoryHandler }) => {
   return (
-    <>
-    <Box>
+    <Stack spacing={1}>
       <Typography variant='body1'>Select Sub-Category</Typography>
       <ButtonGroup
         sx={{flexWrap: 'wrap'}}
@@ -23,8 +22,7 @@ const DisplaySubCategory = ({ mainCategory, subCategories, categoryHandler }) =>
           })
         }
       </ButtonGroup>
-    </Box>
-    </>
+    </Stack>
   )
 }
 

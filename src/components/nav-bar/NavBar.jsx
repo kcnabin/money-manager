@@ -2,8 +2,11 @@ import { NavLink } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
 
 const NavBar = () => {
+    const style = {
+        flexWrap: 'wrap'
+    }
     return (
-        <Stack spacing={2} direction='row' className="main-routes">
+        <Stack direction='row' className="main-routes" sx={style}>
             
             <Button variant='outlined'>
                 <NavLink to='/' >Home</NavLink>
@@ -13,7 +16,7 @@ const NavBar = () => {
             </Button>
 
             <Button variant='outlined'>
-                <NavLink to='summary' >Monthly Summary</NavLink>
+                <NavLink to='summary' >Summary</NavLink>
             </Button>
             
         </Stack>

@@ -1,13 +1,19 @@
+#root {
+    padding: 20px 5%;
+    display: flex;
+    justify-content: center;
+}
+
+#root > div {
+    padding: 24px;
+    border: 1px solid black;
+
+}
+
 .main-routes a {
     text-decoration: none;
 }
 
 .main-routes .active {
     font-weight: bold;
-    
 }
-/* .all-sub-cat button {
-    margin: 10px;
-    border: 1px solid
-}
-     */

@@ -1,14 +1,13 @@
 import { 
-  Button, 
-  FormControl, 
+  Button,
   FormLabel, 
   FormControlLabel, 
   TextField, 
   RadioGroup, 
   Radio, 
   InputAdornment, 
-  IconButton,
-  Box
+  IconButton, 
+  Stack
 } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react'
@@ -23,7 +22,7 @@ const AddNewCategory = ({
  }) => {
   return (
     <>
-    <Box width='250px'>
+    
       <Button 
         variant='contained' 
         color='secondary'
@@ -31,7 +30,7 @@ const AddNewCategory = ({
         onClick={() => setShowAddCategory(!showAddCategory)}
       > {showAddCategory ? `Hide 'Add new category'` : 'Add new category'}
       </Button>
-    </Box>
+    
 
     {
       showAddCategory
@@ -41,6 +40,7 @@ const AddNewCategory = ({
             setExpensesList={setExpensesList} 
             incomeList={incomeList}
             setIncomeList={setIncomeList}
+            fullWidth
           /> 
         : ''
     }
@@ -55,7 +55,7 @@ const AddCategory = ({
   incomeList,
   setIncomeList
 }) => {
-  // console.log(expensesList)
+  
   const [newCategory, setNewCategory ] = useState('')
   const [newCategoryType, setNewCategoryType] = useState('')
 
@@ -84,44 +84,45 @@ const AddCategory = ({
   }
 
   return (
-    <div>
-      <form onSubmit={addNewCategory}>
-        <FormControl>
-          <FormLabel>Adding new category</FormLabel>
-          <RadioGroup 
-            value={newCategoryType} 
-            onChange={handleChange} 
-            name='new category' 
-            row
-          >
-            <FormControlLabel 
-              control={<Radio />} 
-              label='Income' 
-              value='income' 
-            />
-            <FormControlLabel 
-              control={<Radio />} 
-              label='Expenses' 
-              value='expenses' 
-            />
-          </RadioGroup>
+    <form onSubmit={addNewCategory}>
 
-          <TextField
-            label='Add Sub-Category Name'
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
-            InputProps={{
-              endAdornment: <InputAdornment 
-                  position="end">
-                  <IconButton type="submit">
-                    <AddIcon />
-                  </IconButton>
-                </InputAdornment>
-            }}
+      <Stack spacing={1}>
+        <FormLabel>Adding new category</FormLabel>
+        <RadioGroup 
+          value={newCategoryType} 
+          onChange={handleChange} 
+          name='new category' 
+          row
+        >
+          <FormControlLabel 
+            control={<Radio />} 
+            label='Income' 
+            value='income' 
           />
-        </FormControl>
-      </form>
-    </div>
+          <FormControlLabel 
+            control={<Radio />} 
+            label='Expenses' 
+            value='expenses' 
+          />
+        </RadioGroup>
+
+        <TextField
+          label='Add Sub-Category'
+          value={newCategory}
+          sx={{fullWidth: '500px'}}
+          onChange={(e) => setNewCategory(e.target.value)}
+          InputProps={{
+            endAdornment: <InputAdornment 
+                position="end">
+                <IconButton type="submit">
+                  <AddIcon />
+                </IconButton>
+              </InputAdornment>
+          }}
+        />
+      </Stack>
+
+    </form>
   )
 }
 

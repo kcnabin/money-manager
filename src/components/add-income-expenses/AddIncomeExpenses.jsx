@@ -1,18 +1,19 @@
 import { useState } from 'react'
-import { Button, Stack, Box } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 
 import Title from './components/Title'
 import SelectMainCategory from './components/SelectMainCategory'
 import DisplaySubCategory from './components/DisplaySubCategory'
 import AddNewCategory from './components/AddNewCategory';
 import AddAmount from './components/AddAmount'
+import PickDate from './components/PickDate'
 
-const AddIncomeExpenses = () => {
+const AddIncomeExpenses = ({ addedRecords, setAddedRecords }) => {
   const [category, setCategory] = useState('')
   const [expenses, setExpenses] = useState('')
   const [income, setIncome] = useState('')
   const [amount, setAmount] = useState('')
-  const [addedRecords, setAddedRecords] = useState([])
+  const [selectedDate, setSelectedDate] = useState(null)
   
   const [showAddCategory, setShowAddCategory] = useState(false)
 
@@ -25,10 +26,8 @@ const AddIncomeExpenses = () => {
   const addRecord = e => {
     e.preventDefault()
 
-    if (
-      (!category || !amount) ||
-      (category === 'income') && (income === '') ||
-      (category === 'expenses') && (expenses === '')
+    if ( (!category || !amount || !selectedDate ) || 
+         ((category === 'income' && income === '') || (category === 'expenses' && expenses === ''))
     ){
       alert('Please add all options')
       return
@@ -38,14 +37,14 @@ const AddIncomeExpenses = () => {
       category,
       subCategory: category === 'income' ? income : expenses,
       amount,
-      // saved date will be added in backend
-      date: new Date()
+      date: selectedDate
     }))
 
     alert('Record Added')
     console.log(addedRecords)
     setCategory('')
     setAmount('')
+    setSelectedDate(null)
 
   }
 
@@ -69,27 +68,28 @@ const AddIncomeExpenses = () => {
   }
 
   return (
-      <Stack spacing={2}>
+      <Stack spacing={2} sx={{maxWidth: '300px'}} >
         <Title />
-        <SelectMainCategory category={category} setCategory={setCategory} />
-        {
-          renderSubCategory()
-        }
+        <form onSubmit={addRecord}>
+          <Stack spacing={2}>
+          <PickDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
 
-        <AddAmount amount={amount} setAmount={setAmount} />
-        
-        <Box width='150px'>
+          <SelectMainCategory category={category} setCategory={setCategory} />
+          {
+            renderSubCategory()
+          }
+
+          <AddAmount amount={amount} setAmount={setAmount} />
+          
           <Button
             type='submit'
             variant='contained'
             color='primary'
-            onClick={addRecord}
-            fullWidth
           >
             Add Record
           </Button>
-          
-        </Box>
+          </Stack>
+        </form>
 
         <AddNewCategory 
           showAddCategory={showAddCategory} 
