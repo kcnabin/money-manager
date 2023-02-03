@@ -18,7 +18,8 @@ import { addToExpensesList } from "../../../features/records/transactionsSlice";
 
 const AddNewCategory = ({ 
   showAddCategory,
-  setShowAddCategory
+  setShowAddCategory,
+  displayMsg
  }) => {
   return (
     <>
@@ -33,6 +34,7 @@ const AddNewCategory = ({
       showAddCategory
         ? <AddCategory 
             setShowAddCategory={setShowAddCategory}
+            displayMsg={displayMsg}
             fullWidth
           /> 
         : ''
@@ -41,7 +43,7 @@ const AddNewCategory = ({
   )
 }
 
-const AddCategory = ({ setShowAddCategory }) => {
+const AddCategory = ({ setShowAddCategory, displayMsg }) => {
   const dispatch = useDispatch()
   
   const [newCategory, setNewCategory ] = useState('')
@@ -54,7 +56,10 @@ const AddCategory = ({ setShowAddCategory }) => {
   const addNewCategory = e => {
     e.preventDefault()
     if (newCategory === '' || newCategoryType === '') {
-      alert('Must select both main category and subcategory')
+      displayMsg({
+        text: 'Must select both main category and subcategory',
+        bagcolor: 'warning.light'
+      })
       return
     }
 
@@ -64,7 +69,10 @@ const AddCategory = ({ setShowAddCategory }) => {
       dispatch(addToExpensesList(newCategory))
     }
     
-    alert(`${newCategory} added!`)
+    displayMsg({
+      text: `${newCategory} added!`,
+      bagcolor: 'success.light'
+    })
 
     setShowAddCategory(false)
     setNewCategory('')
