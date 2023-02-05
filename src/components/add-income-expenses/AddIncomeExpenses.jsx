@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, Box } from '@mui/material'
 
 import Title from './components/Title'
 import SelectMainCategory from './components/SelectMainCategory'
@@ -74,50 +74,56 @@ const AddIncomeExpenses = () => {
   }
 
   return (
-    <>
+    <Stack>
       <DisplayMessage msg={msg} />
-      <Stack spacing={2} sx={{maxWidth: '300px'}} >
-      <Title />
-      <form onSubmit={addRecord}>
-        <Stack spacing={2}>
-        <PickDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
+      <Stack spacing={2} sx={{
+          maxWidth: '500px',
+          margin: '0 5%'
+        }} 
+      >
+        <Title />
+        <form onSubmit={addRecord}>
+          <Stack spacing={{
+            xs: 2,
+            sm: 4
+          }}>
+          <PickDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
 
-        <SelectMainCategory 
-          category={category} 
-          setCategory={setCategory} 
-          setDisplaySubCategory={setDisplaySubCategory}
+          <SelectMainCategory 
+            category={category} 
+            setCategory={setCategory} 
+            setDisplaySubCategory={setDisplaySubCategory}
+          />
+
+          {
+            displaySubCategory
+              ? <DisplaySubCategory
+                  mainCategory={category}
+                  subCategory={subCategory}
+                  setSubCategory={setSubCategory}
+                />
+              : ""
+          }
+
+          <AddAmount amount={amount} setAmount={setAmount} />
+          
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+          >
+            Add Record
+          </Button>
+          </Stack>
+        </form>
+
+        <AddNewCategory 
+          showAddCategory={showAddCategory} 
+          setShowAddCategory={setShowAddCategory}
+          displayMsg={displayMsg}
         />
-
-        {
-          displaySubCategory
-            ? <DisplaySubCategory
-                mainCategory={category}
-                subCategory={subCategory}
-                setSubCategory={setSubCategory}
-              />
-            : ""
-        }
-
-        <AddAmount amount={amount} setAmount={setAmount} />
-        
-        <Button
-          type='submit'
-          variant='contained'
-          color='primary'
-        >
-          Add Record
-        </Button>
-        </Stack>
-      </form>
-
-      <AddNewCategory 
-        showAddCategory={showAddCategory} 
-        setShowAddCategory={setShowAddCategory}
-        displayMsg={displayMsg}
-      />
+      </Stack>
     </Stack>
-    </>
-    
   )
 }
 

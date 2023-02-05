@@ -1,19 +1,31 @@
-#root {
-    padding: 20px 5%;
-    display: flex;
-    justify-content: center;
+body {
+    padding: 0;
+    margin: 0;
 }
 
-#root > div {
-    padding: 24px;
-    border: 1px solid black;
-
-}
-
-.main-routes a {
+a, a:visited, a:hover, a:active {
+    color: inherit;
     text-decoration: none;
 }
 
 .main-routes .active {
-    font-weight: bold;
+    color: #d4d6d5;
+    /* text-decoration: underline; */
 }
+
+/* #root {
+    padding: 0 5%;
+    display: flex;
+    justify-content: center;
+} */
+
+/* #root > div {
+    padding:  0 24px;
+
+} */
+
+/* .main-routes a {
+    text-decoration: none;
+}
+
+ */

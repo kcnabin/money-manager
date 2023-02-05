@@ -1,7 +1,6 @@
-
-import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import { Typography, Stack } from '@mui/material'
+import { Routes, Route } from 'react-router-dom'
+import { Stack } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
@@ -15,9 +14,6 @@ const App = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
     <Stack spacing={2}>
-      <Typography variant='h6' sx={{textAlign: 'center', fontWeight: 'bold'}}>
-        Money Manager - Better way to keep track your money
-      </Typography>
 
       <NavBar />
 
