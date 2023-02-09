@@ -1,6 +1,6 @@
 {
   "name": "money-manager",
-  "homepage": ".",
+  "homepage": "https://kcnabin.github.io/money-manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +50,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "eslint": "^8.33.0",
+    "gh-pages": "^5.0.0",
+    "json-server": "^0.17.1"
   }
 }

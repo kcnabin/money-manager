@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Stack, Box } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 
 import Title from './components/Title'
 import SelectMainCategory from './components/SelectMainCategory'
