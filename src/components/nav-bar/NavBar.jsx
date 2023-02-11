@@ -1,14 +1,16 @@
 import { NavLink } from 'react-router-dom'
-import { Stack, AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
+import { Stack, AppBar, Toolbar, Typography, IconButton, Menu, MenuItem, Button } from '@mui/material'
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const [anchorElMenu, setAnchorElMenu] = useState(null)
     const openMenu = Boolean(anchorElMenu)
     const closeMenu = () => setAnchorElMenu(null)
+    const navigate = useNavigate()
 
     return (
         <AppBar position='static' sx={{bgcolor: 'info.dark'}}>
@@ -66,19 +68,28 @@ const NavBar = () => {
                     onClose={closeMenu}
                 >
                     <MenuItem>
-                        <NavLink to='/' onClick={closeMenu}>
+                        <Button onClick={() => {
+                            closeMenu()
+                            navigate('/')
+                        }}>
                             <Typography variant='body2'>Home</Typography>
-                        </NavLink>
+                        </Button>
                     </MenuItem>
-                    <MenuItem onClick={closeMenu}>
-                        <NavLink to='add'>
+                    <MenuItem>
+                        <Button onClick={() => {
+                            closeMenu()
+                            navigate('/add')
+                        }}>
                             <Typography variant='body2'>Record Transactions</Typography>
-                        </NavLink>
+                        </Button>
                     </MenuItem>
-                    <MenuItem onClick={closeMenu}>
-                        <NavLink to='summary' >
+                    <MenuItem>
+                        <Button onClick={() => {
+                            closeMenu()
+                            navigate('/summary')
+                        }}>
                             <Typography variant='body2'>Summary</Typography>
-                        </NavLink>
+                        </Button>
                     </MenuItem>
                 </Menu>
 

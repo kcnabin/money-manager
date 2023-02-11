@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 const DisplaySubCategory = ({ mainCategory, subCategory, setSubCategory }) => {
   const incomeList = useSelector(state => state.transactions.incomeList)
   const expensesList = useSelector(state => state.transactions.expensesList)
-  const subCategories = mainCategory === 'income' ? incomeList : (mainCategory ==='expenses' ? expensesList : [])
+  let subCategories = mainCategory === 'income' ? incomeList : (mainCategory ==='expenses' ? expensesList : [])
 
   return (
     <Stack spacing={1}>

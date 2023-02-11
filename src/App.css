@@ -11,6 +11,7 @@ a, a:visited, a:hover, a:active {
 .main-routes .active {
     color: #d4d6d5;
     /* text-decoration: underline; */
+    border-bottom: 2px solid grey;
 }
 
 /* #root {

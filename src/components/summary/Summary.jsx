@@ -4,11 +4,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useState } from 'react'
 
 const Summary = () => {
-    const checkForDateMatch = (dateAdded, displayDate) => {
-        if ( (dateAdded.getFullYear() === displayDate.getFullYear())
-            && (dateAdded.getMonth() === displayDate.getMonth()) ) {
-                return true
-            }
+    const checkForMonthMatch = (dateAdded, displayDate) => {
+        if ((dateAdded.year === displayDate.getFullYear()) &&
+             (dateAdded.month === (displayDate.getMonth() + 1))       
+        ) {
+            return true
+        }
         else return false
     }
 
@@ -16,18 +17,16 @@ const Summary = () => {
     console.info('Selected date' , displayDate.getFullYear(), displayDate.getMonth() + 1)
 
     const matchedMonthlyIncomes = useSelector(state => state.transactions.incomeRecords)
-        .filter(eachIncome => checkForDateMatch(eachIncome.dateAdded, displayDate))
+        .filter(eachIncome => checkForMonthMatch(eachIncome.dateAdded, displayDate))
     console.info('All incomes for selected months', matchedMonthlyIncomes)
     
     const allIncomeAmount = matchedMonthlyIncomes.map(eachIncome => eachIncome.amount)
     const totalIncome = allIncomeAmount
         .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
 
-
-
     const matchedMonthlyExpenses = useSelector(state => state.transactions.expensesRecords)
-        .filter(eachExpense => checkForDateMatch(eachExpense.dateAdded, displayDate))
-    console.info('All incomes for selected months', matchedMonthlyExpenses)
+        .filter(eachExpense => checkForMonthMatch(eachExpense.dateAdded, displayDate))
+    console.info('All expenses for selected months', matchedMonthlyExpenses)
 
     const allExpensesAmount = matchedMonthlyExpenses.map(eachExpense => eachExpense.amount)
     const totalExpenses = allExpensesAmount

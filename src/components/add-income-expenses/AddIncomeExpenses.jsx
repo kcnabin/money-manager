@@ -11,6 +11,7 @@ import DisplayMessage from './components/DisplayMessage'
 
 import { useDispatch } from 'react-redux'
 import { addIncomeRecords, addExpensesRecords } from '../../features/records/transactionsSlice'
+import AddTitle from './components/AddTitle'
 
 const AddIncomeExpenses = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const AddIncomeExpenses = () => {
   const [selectedDate, setSelectedDate] = useState(null)
   const [category, setCategory] = useState('')
   const [subCategory, setSubCategory] = useState('')
+  const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [msg, setMsg] = useState(null)
 
@@ -28,13 +30,15 @@ const AddIncomeExpenses = () => {
     setSelectedDate(null)
     setCategory('')
     setSubCategory('')
+    setTitle('')
     setAmount('')
+    setDisplaySubCategory(false)
   }
 
   const addRecord = e => {
     e.preventDefault()
 
-    if (!category || !subCategory || !amount || !selectedDate) {
+    if (!category || !subCategory || !amount || !selectedDate || !title) {
       displayMsg({
         text: 'Please select all options',
         bagcolor: 'error.light'
@@ -43,9 +47,14 @@ const AddIncomeExpenses = () => {
     }
 
     const newRecord = {
-      dateAdded: selectedDate,
+      dateAdded: {
+        year: selectedDate.getFullYear(),
+        month: selectedDate.getMonth() + 1,
+        day: selectedDate.getDate()
+      },
       category,
       subCategory,
+      title,
       amount
     }
 
@@ -104,6 +113,8 @@ const AddIncomeExpenses = () => {
                 />
               : ""
           }
+
+          <AddTitle title={title} setTitle={setTitle} />
 
           <AddAmount amount={amount} setAmount={setAmount} />
           
