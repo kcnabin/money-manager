@@ -1,0 +1,109 @@
+{
+  "incomeList": [
+    {
+      "name": "Salary"
+    },
+    {
+      "name": "Interest"
+    },
+    {
+      "name": "Allowances"
+    },
+    {
+      "name": "Bonus",
+      "id": "500"
+    },
+    {
+      "name": "signing",
+      "id": "_m5Vsvp"
+    },
+    {
+      "name": "New offer?",
+      "id": "2FiueP_"
+    }
+  ],
+  "expensesList": [
+    "Rent",
+    "Food",
+    "Fuel"
+  ],
+  "incomeRecords": [
+    {
+      "id": "1",
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 10
+      },
+      "category": "income",
+      "subCategory": "interest",
+      "title": "from FD",
+      "amount": 500
+    },
+    {
+      "id": "2",
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 1
+      },
+      "category": "income",
+      "subCategory": "interest",
+      "title": "from new FD",
+      "amount": 725
+    },
+    {
+      "id": "3",
+      "dateAdded": {
+        "year": 2023,
+        "month": 1,
+        "day": 10
+      },
+      "category": "income",
+      "subCategory": "salary",
+      "title": "Baisakh 2079",
+      "amount": 5000
+    },
+    {
+      "id": "g6mTDdS"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 14
+      },
+      "category": "income",
+      "subCategory": "interest",
+      "title": "what",
+      "amount": 777,
+      "id": "3d719988-63df-4703-a63a-5e3eb9287e4d"
+    }
+  ],
+  "expensesRecords": [
+    {
+      "id": "1001",
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 10
+      },
+      "category": "expenses",
+      "subCategory": "rent",
+      "title": "rent feb 2023",
+      "amount": 1000
+    },
+    {
+      "id": "1002",
+      "dateAdded": {
+        "year": 2023,
+        "month": 1,
+        "day": 11
+      },
+      "category": "expenses",
+      "subCategory": "rent",
+      "title": "rent jan 2023",
+      "amount": 1050
+    }
+  ]
+}

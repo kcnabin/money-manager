@@ -12,6 +12,8 @@ import DisplayMessage from './components/DisplayMessage'
 import { useDispatch } from 'react-redux'
 import { addIncomeRecords, addExpensesRecords } from '../../features/records/transactionsSlice'
 import AddTitle from './components/AddTitle'
+import { v4 as uuidv4 } from 'uuid'
+import axios from 'axios'
 
 const AddIncomeExpenses = () => {
   const dispatch = useDispatch()
@@ -35,7 +37,7 @@ const AddIncomeExpenses = () => {
     setDisplaySubCategory(false)
   }
 
-  const addRecord = e => {
+  const addRecord = async (e) => {
     e.preventDefault()
 
     if (!category || !subCategory || !amount || !selectedDate || !title) {
@@ -53,13 +55,21 @@ const AddIncomeExpenses = () => {
         day: selectedDate.getDate()
       },
       category,
-      subCategory,
+      subCategory: subCategory.toLowerCase(),
       title,
-      amount
+      amount,
+      id: uuidv4()
     }
 
     if (category === 'income') {
-      dispatch(addIncomeRecords(newRecord))
+      try {
+        const savedRecord = await axios.post('http://localhost:3001/incomeRecords', newRecord)
+        dispatch(addIncomeRecords(savedRecord.data))
+      } catch (e) {
+        console.log(e)
+        return
+      }
+      // dispatch(addIncomeRecords(newRecord))
     } else if (category === 'expenses') {
       dispatch(addExpensesRecords(newRecord))
     } else {

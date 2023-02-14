@@ -15,6 +15,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addToIncomeList } from "../../../features/records/transactionsSlice";
 import { addToExpensesList } from "../../../features/records/transactionsSlice";
+import axios from 'axios'
 
 const AddNewCategory = ({ 
   showAddCategory,
@@ -53,7 +54,7 @@ const AddCategory = ({ setShowAddCategory, displayMsg }) => {
     setNewCategoryType(e.target.value)
   }
 
-  const addNewCategory = e => {
+  const addNewCategory = async (e) => {
     e.preventDefault()
     if (newCategory === '' || newCategoryType === '') {
       displayMsg({
@@ -64,9 +65,20 @@ const AddCategory = ({ setShowAddCategory, displayMsg }) => {
     }
 
     if (newCategoryType === 'income') {
-      dispatch(addToIncomeList(newCategory))
-    } else {
+      const incomeListUrl = 'http://localhost:3001/incomeList'
+      try {
+        const savedIncomeCat = await axios.post(incomeListUrl, {name: newCategory})
+        dispatch(addToIncomeList(savedIncomeCat.data.name))
+      } catch (e) {
+        console.log('Failed to save', e)
+        return
+      }
+
+      // dispatch(addToIncomeList(newCategory))
+    } else if (newCategoryType === 'expenses')  {
       dispatch(addToExpensesList(newCategory))
+    } else {
+      console.log('Can not save')
     }
     
     displayMsg({
