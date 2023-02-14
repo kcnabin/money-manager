@@ -11,21 +11,23 @@
     },
     {
       "name": "Bonus",
-      "id": "500"
-    },
-    {
-      "name": "signing",
-      "id": "_m5Vsvp"
-    },
-    {
-      "name": "New offer?",
-      "id": "2FiueP_"
+      "id": "e3a8ba66-07af-4d3e-afa2-4ae71bbe6543"
     }
   ],
   "expensesList": [
-    "Rent",
-    "Food",
-    "Fuel"
+    {
+      "name": "Rent"
+    },
+    {
+      "name": "Food"
+    },
+    {
+      "name": "Fuel"
+    },
+    {
+      "name": "Vehicle Maintainence",
+      "id": "05b9ad36-4928-40a9-b467-0482bbf35d47"
+    }
   ],
   "incomeRecords": [
     {
@@ -65,7 +67,16 @@
       "amount": 5000
     },
     {
-      "id": "g6mTDdS"
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 14
+      },
+      "category": "income",
+      "subCategory": "bonus",
+      "title": "Turnover Bonus 2023",
+      "amount": 50,
+      "id": "ceab3123-ed23-47f8-b5eb-182c964a665c"
     },
     {
       "dateAdded": {
@@ -74,10 +85,10 @@
         "day": 14
       },
       "category": "income",
-      "subCategory": "interest",
-      "title": "what",
-      "amount": 777,
-      "id": "3d719988-63df-4703-a63a-5e3eb9287e4d"
+      "subCategory": "allowances",
+      "title": "Daily Allowances",
+      "amount": 50,
+      "id": "2eae7ae6-3dea-4049-982d-834cf373dbd8"
     }
   ],
   "expensesRecords": [
@@ -104,6 +115,18 @@
       "subCategory": "rent",
       "title": "rent jan 2023",
       "amount": 1050
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 13
+      },
+      "category": "expenses",
+      "subCategory": "vehicle maintainence",
+      "title": "Brakepads change",
+      "amount": 50,
+      "id": "7dfce97b-2773-4300-8529-297b41bf1e89"
     }
   ]
 }

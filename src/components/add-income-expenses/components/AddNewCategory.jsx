@@ -11,11 +11,10 @@ import {
 } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react'
-
 import { useDispatch } from 'react-redux'
 import { addToIncomeList } from "../../../features/records/transactionsSlice";
 import { addToExpensesList } from "../../../features/records/transactionsSlice";
-import axios from 'axios'
+import { addNewIncome, addNewExpenses } from '../../../services/dbServices'
 
 const AddNewCategory = ({ 
   showAddCategory,
@@ -45,6 +44,18 @@ const AddNewCategory = ({
 }
 
 const AddCategory = ({ setShowAddCategory, displayMsg }) => {
+  const displayInfo = info => {
+    displayMsg({
+      text: info,
+      bagcolor: 'success.light'
+    })
+  }
+  const displayError = error => {
+    displayMsg({
+      text: error,
+      bagcolor: 'error.light'
+    })
+  }
   const dispatch = useDispatch()
   
   const [newCategory, setNewCategory ] = useState('')
@@ -57,34 +68,36 @@ const AddCategory = ({ setShowAddCategory, displayMsg }) => {
   const addNewCategory = async (e) => {
     e.preventDefault()
     if (newCategory === '' || newCategoryType === '') {
-      displayMsg({
-        text: 'Must select both main category and subcategory',
-        bagcolor: 'warning.light'
-      })
+      displayError('Must select both main category and subcategory')
       return
     }
 
     if (newCategoryType === 'income') {
-      const incomeListUrl = 'http://localhost:3001/incomeList'
       try {
-        const savedIncomeCat = await axios.post(incomeListUrl, {name: newCategory})
-        dispatch(addToIncomeList(savedIncomeCat.data.name))
+        const newCat = await addNewIncome(newCategory)
+        dispatch(addToIncomeList(newCat))
+        displayInfo('New income subcategory added.')
       } catch (e) {
-        console.log('Failed to save', e)
+        console.log(e)
+        displayError(`Failed to add new income subcategory!`)
         return
       }
 
-      // dispatch(addToIncomeList(newCategory))
-    } else if (newCategoryType === 'expenses')  {
-      dispatch(addToExpensesList(newCategory))
+    } else if (newCategoryType === 'expenses') {
+      try {
+        const newCat = await addNewExpenses(newCategory)
+        dispatch(addToExpensesList(newCat))
+        displayInfo('New expenses subcategory added.')
+      } catch (e) {
+        console.log(e)
+        displayError(`Failed to add new expenses subcategory!`)
+      }
     } else {
-      console.log('Can not save')
+      displayInfo('Failed to save...')
+      return
     }
     
-    displayMsg({
-      text: `${newCategory} added!`,
-      bagcolor: 'success.light'
-    })
+    displayInfo(`New subcategory '${newCategory}' added!`)
 
     setShowAddCategory(false)
     setNewCategory('')

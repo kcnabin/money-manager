@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 import { addIncomeRecords, addExpensesRecords } from '../../features/records/transactionsSlice'
 import AddTitle from './components/AddTitle'
 import { v4 as uuidv4 } from 'uuid'
-import axios from 'axios'
+import { saveIncome, saveExpenses } from '../../services/dbServices'
 
 const AddIncomeExpenses = () => {
   const dispatch = useDispatch()
@@ -36,15 +36,28 @@ const AddIncomeExpenses = () => {
     setAmount('')
     setDisplaySubCategory(false)
   }
+  const displayMsg = msg => {
+    setMsg(msg)
+    setTimeout(() => setMsg(null), 10000)
+  }
+  const displayInfo = info => {
+    displayMsg({
+      text: info,
+      bagcolor: 'success.light'
+    })
+  }
+  const displayError = error => {
+    displayMsg({
+      text: error,
+      bagcolor: 'error.light'
+    })
+  }
 
   const addRecord = async (e) => {
     e.preventDefault()
 
     if (!category || !subCategory || !amount || !selectedDate || !title) {
-      displayMsg({
-        text: 'Please select all options',
-        bagcolor: 'error.light'
-      })
+      displayError('Please select all options')
       return
     }
 
@@ -63,33 +76,29 @@ const AddIncomeExpenses = () => {
 
     if (category === 'income') {
       try {
-        const savedRecord = await axios.post('http://localhost:3001/incomeRecords', newRecord)
-        dispatch(addIncomeRecords(savedRecord.data))
+        const savedRecord = await saveIncome(newRecord)
+        dispatch(addIncomeRecords(savedRecord))
       } catch (e) {
         console.log(e)
+        displayError('Error saving new income!')
         return
       }
-      // dispatch(addIncomeRecords(newRecord))
     } else if (category === 'expenses') {
-      dispatch(addExpensesRecords(newRecord))
+      try {
+        const savedRecord = await saveExpenses(newRecord)
+        dispatch(addExpensesRecords(savedRecord))
+      } catch (e) {
+        console.log(e)
+        displayError('Error saving new expenses!')
+        return
+      }
     } else {
-      displayMsg({
-        text: 'Error adding new record',
-        bagcolor: 'error.light'
-      })
+      displayError('Error adding new record')
       return
     }
 
-    displayMsg({
-      text: `New record for '${subCategory}' added...`,
-      bagcolor: 'success.light'
-    })
+    displayInfo(`New record for '${subCategory}' added...`)
     resetSelection()
-  }
-
-  const displayMsg = msg => {
-    setMsg(msg)
-    setTimeout(() => setMsg(null), 3000)
   }
 
   return (

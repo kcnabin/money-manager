@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { getInitialData } from '../../services/dbServices'
 
 const initialState = {
   incomeList: [],
@@ -11,36 +11,13 @@ const initialState = {
 }
 
 export const fetchInitialData = createAsyncThunk('transactions/fetchInitialData', async () => {
-  const incomeListUrl = 'http://localhost:3001/incomeList'
-  const expensesListUrl = 'http://localhost:3001/expensesList'
-  const incomeRecordsUrl = 'http://localhost:3001/incomeRecords'
-  const expensesRecordUrl = 'http://localhost:3001/expensesRecords'
-
   try {
-    const incomeRecords = await axios.get(incomeRecordsUrl)
-    const expensesRecords = await axios.get(expensesRecordUrl)
-    const incomeList = await axios.get(incomeListUrl)
-    const newIncomeList = incomeList.data.map(eachIncome => eachIncome.name)
-    const expensesList = await axios.get(expensesListUrl)
-    return {
-      incomeRecords: incomeRecords.data,
-      expensesRecords: expensesRecords.data,
-      incomeList: newIncomeList,
-      expensesList: expensesList.data
-    }
+    const fetchedData = await getInitialData()
+    return fetchedData
   } catch (e) {
+    console.log('Error fetching initial data')
     console.log(e)
   }
-  
-
-  // try {
-  //   const res = await axios.get(baseUrl)
-  //   console.log(res.data)
-  //   return res.data
-  // } catch (e) {
-  //   console.log(e)
-  // }
-
 })
 
 const transactionsSlice = createSlice({
