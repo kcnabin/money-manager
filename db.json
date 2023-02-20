@@ -1,28 +1,38 @@
 {
   "incomeList": [
     {
-      "name": "Salary"
+      "name": "Salary",
+      "id": "1"
     },
     {
-      "name": "Interest"
+      "name": "Interest",
+      "id": "2"
     },
     {
-      "name": "Allowances"
+      "name": "Allowances",
+      "id": "3"
     },
     {
       "name": "Bonus",
       "id": "e3a8ba66-07af-4d3e-afa2-4ae71bbe6543"
+    },
+    {
+      "name": "Side Hustle",
+      "id": "d61caaec-acee-40ec-a632-d95684a58b50"
     }
   ],
   "expensesList": [
     {
-      "name": "Rent"
+      "name": "Rent",
+      "id": "1"
     },
     {
-      "name": "Food"
+      "name": "Food",
+      "id": "2"
     },
     {
-      "name": "Fuel"
+      "name": "Fuel",
+      "id": "3"
     },
     {
       "name": "Vehicle Maintainence",
@@ -40,7 +50,7 @@
       "category": "income",
       "subCategory": "interest",
       "title": "from FD",
-      "amount": 500
+      "amount": 1500
     },
     {
       "id": "2",
@@ -52,43 +62,79 @@
       "category": "income",
       "subCategory": "interest",
       "title": "from new FD",
-      "amount": 725
+      "amount": 500
     },
     {
       "id": "3",
       "dateAdded": {
         "year": 2023,
         "month": 1,
-        "day": 10
+        "day": 1
       },
       "category": "income",
       "subCategory": "salary",
-      "title": "Baisakh 2079",
-      "amount": 5000
+      "title": "Salary for Magh 2079",
+      "amount": 1000
     },
     {
       "dateAdded": {
         "year": 2023,
         "month": 2,
-        "day": 14
+        "day": 1
+      },
+      "category": "income",
+      "subCategory": "salary",
+      "title": "sal falgun",
+      "amount": 555,
+      "id": "930c9e09-2d06-40f9-84de-76481a453e76"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 1,
+        "day": 12
       },
       "category": "income",
       "subCategory": "bonus",
-      "title": "Turnover Bonus 2023",
-      "amount": 50,
-      "id": "ceab3123-ed23-47f8-b5eb-182c964a665c"
+      "title": "bonus baby",
+      "amount": 80,
+      "id": "be0add18-77fc-4ba9-acb3-fb2a867c5f83"
     },
     {
       "dateAdded": {
         "year": 2023,
         "month": 2,
-        "day": 14
+        "day": 20
       },
       "category": "income",
       "subCategory": "allowances",
-      "title": "Daily Allowances",
-      "amount": 50,
-      "id": "2eae7ae6-3dea-4049-982d-834cf373dbd8"
+      "title": "Vehicle Allowance for Feb 2023",
+      "amount": 500,
+      "id": "e2c526f2-17e2-418e-be7d-e0e899dd1604"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 19
+      },
+      "category": "income",
+      "subCategory": "allowances",
+      "title": "Maintainence (Mobil)",
+      "amount": 800,
+      "id": "f654adbe-4a90-45aa-8d37-bee703e002c7"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 17
+      },
+      "category": "income",
+      "subCategory": "allowances",
+      "title": "Communication Allowance",
+      "amount": 1000,
+      "id": "549b3006-5f0e-4fe2-bd92-6c8be2466a9d"
     }
   ],
   "expensesRecords": [
@@ -127,6 +173,18 @@
       "title": "Brakepads change",
       "amount": 50,
       "id": "7dfce97b-2773-4300-8529-297b41bf1e89"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 19
+      },
+      "category": "expenses",
+      "subCategory": "food",
+      "title": "Chicken Meat",
+      "amount": 390,
+      "id": "0ba3056e-9276-40bb-bc41-e77dea6b25aa"
     }
   ]
 }

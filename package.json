@@ -1,6 +1,6 @@
 {
   "name": "money-manager",
-  "homepage": "https://kcnabin.github.io/money-manager",
+  
   "version": "0.1.0",
   "private": true,
   "dependencies": {

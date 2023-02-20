@@ -13,7 +13,9 @@ const initialState = {
 export const fetchInitialData = createAsyncThunk('transactions/fetchInitialData', async () => {
   try {
     const fetchedData = await getInitialData()
-    return fetchedData
+    if (fetchedData) {
+      return fetchedData
+    }
   } catch (e) {
     console.log('Error fetching initial data')
     console.log(e)
@@ -40,6 +42,9 @@ const transactionsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchInitialData.pending, state => {
       state.loading = true
+      // default income & expenses list when database is not connected
+      state.incomeList = ['Salary', 'Interest', 'Allowances']
+      state.expensesList = ['Rent', 'Food', 'Vehicle']
     })
     builder.addCase(fetchInitialData.rejected, (state, action) => {
       state.loading = false

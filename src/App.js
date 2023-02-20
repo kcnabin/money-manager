@@ -9,6 +9,7 @@ import NavBar from './components/nav-bar/NavBar'
 import Home from './components/home/Home'
 import Summary from './components/summary/Summary'
 import AddIncomeExpenses from './components/add-income-expenses/AddIncomeExpenses'
+import SubCategorySummary from './components/subcatSummary/SubCategorySummary'
 import { useDispatch } from 'react-redux'
 import { fetchInitialData } from './features/records/transactionsSlice'
 
@@ -32,6 +33,8 @@ const App = () => {
           element={<AddIncomeExpenses />} 
         />
         <Route path='summary' element={<Summary />} />
+        <Route path='/categorySummary' element={<SubCategorySummary />} />
+        
       </Routes>
 
     </Stack>

@@ -41,10 +41,10 @@ const NavBar = () => {
                     <NavLink to='/'>
                         <Typography variant='body1'>Home</Typography>
                     </NavLink>
-                    <NavLink to='add'>
+                    <NavLink to='/add'>
                         <Typography variant='body1'>Record Transactions</Typography>
                     </NavLink>
-                    <NavLink to='summary' >
+                    <NavLink to='/summary' >
                         <Typography variant='body1'>Summary</Typography>
                     </NavLink>
                 </Stack>
