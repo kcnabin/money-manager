@@ -3,13 +3,40 @@ import { Button, Stack, Typography, Card, CardContent, CardActions, IconButton }
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { displayDate } from "../../helper/dateHelper";
-
+import { deleteRecord } from "../../services/dbServices";
+import { deleteExpensesRecord, deleteIncomeRecord } from "../../features/records/transactionsSlice";
+import { useDispatch } from "react-redux";
 
 const SubCategorySummary = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { state } = useLocation();
 
   console.log(state)
+
+  const handleDelete = async (id, category) => {
+    if (!window.confirm('Want to delete record?')) {
+      return
+    }
+
+    try {
+      await deleteRecord(id, category)
+      if (category.toLowerCase() === 'income') {
+        dispatch(deleteIncomeRecord(id))
+      } else {
+        dispatch(deleteExpensesRecord(id))
+      }
+      alert('Record deleted successfully!')
+      navigate(-1)
+    } catch (e) {
+      alert('Error deleting record')
+      console.log(e)
+    }
+  }
+
+  const handleEdit = (record) => {
+    navigate('/editRecord', { state: record})
+  }
 
   return (
     <Stack spacing={2} sx={{padding: '0 32px 16px '}}>
@@ -46,10 +73,10 @@ const SubCategorySummary = () => {
                 </CardContent>
 
                 <CardActions sx={{justifyContent: 'flex-end'}}>
-                  <IconButton color='secondary'>
+                  <IconButton color='secondary' onClick={() => handleEdit(eachRecord)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton color='error'>
+                  <IconButton color='error' onClick={() => handleDelete(eachRecord.id, eachRecord.category)}>
                     <DeleteIcon />
                   </IconButton>
                 </CardActions>

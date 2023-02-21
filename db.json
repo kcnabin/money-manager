@@ -37,6 +37,18 @@
     {
       "name": "Vehicle Maintainence",
       "id": "05b9ad36-4928-40a9-b467-0482bbf35d47"
+    },
+    {
+      "name": "Snacks",
+      "id": "da464052-eebd-4549-a382-3205f0661459"
+    },
+    {
+      "name": "Electricity",
+      "id": "2ac3c9c2-cdc8-4f1b-96c3-f65e47962a15"
+    },
+    {
+      "name": "Movie Expenses",
+      "id": "5a1a56b7-7028-4cb0-8eed-50826878da3a"
     }
   ],
   "incomeRecords": [
@@ -53,18 +65,6 @@
       "amount": 1500
     },
     {
-      "id": "2",
-      "dateAdded": {
-        "year": 2023,
-        "month": 2,
-        "day": 1
-      },
-      "category": "income",
-      "subCategory": "interest",
-      "title": "from new FD",
-      "amount": 500
-    },
-    {
       "id": "3",
       "dateAdded": {
         "year": 2023,
@@ -75,18 +75,6 @@
       "subCategory": "salary",
       "title": "Salary for Magh 2079",
       "amount": 1000
-    },
-    {
-      "dateAdded": {
-        "year": 2023,
-        "month": 2,
-        "day": 1
-      },
-      "category": "income",
-      "subCategory": "salary",
-      "title": "sal falgun",
-      "amount": 555,
-      "id": "930c9e09-2d06-40f9-84de-76481a453e76"
     },
     {
       "dateAdded": {
@@ -135,6 +123,18 @@
       "title": "Communication Allowance",
       "amount": 1000,
       "id": "549b3006-5f0e-4fe2-bd92-6c8be2466a9d"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 21
+      },
+      "category": "income",
+      "subCategory": "bonus",
+      "title": "side hustle",
+      "amount": 888,
+      "id": "4e217c02-d6ab-47f0-b95e-35431269cca4"
     }
   ],
   "expensesRecords": [
@@ -166,25 +166,37 @@
       "dateAdded": {
         "year": 2023,
         "month": 2,
-        "day": 13
+        "day": 20
       },
       "category": "expenses",
-      "subCategory": "vehicle maintainence",
-      "title": "Brakepads change",
-      "amount": 50,
-      "id": "7dfce97b-2773-4300-8529-297b41bf1e89"
+      "subCategory": "fuel",
+      "title": "Petrol",
+      "amount": 800,
+      "id": "5a637482-699d-4af7-a948-11b89c89f972"
     },
     {
       "dateAdded": {
         "year": 2023,
         "month": 2,
-        "day": 19
+        "day": 10
       },
       "category": "expenses",
-      "subCategory": "food",
-      "title": "Chicken Meat",
-      "amount": 390,
-      "id": "0ba3056e-9276-40bb-bc41-e77dea6b25aa"
+      "subCategory": "fuel",
+      "title": "Diesel",
+      "amount": 725,
+      "id": "b1786951-88d4-4a7d-b6d8-e2fe8e97afe8"
+    },
+    {
+      "dateAdded": {
+        "year": 2023,
+        "month": 2,
+        "day": 15
+      },
+      "category": "expenses",
+      "subCategory": "movie expenses",
+      "title": "Pathan",
+      "amount": 800,
+      "id": "fd32b133-1d53-4828-b4ee-b106eacf3fe2"
     }
   ]
 }

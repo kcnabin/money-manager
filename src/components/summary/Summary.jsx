@@ -62,7 +62,7 @@ const Summary = () => {
     // console.log('monthlyExpensesSummary', monthlyExpensesSummary)
     
     return (
-        <Stack sx={{padding: '0 16px'}} spacing={2}>
+        <Stack sx={{padding: '0 16px'}} spacing={3}>
             <Stack spacing={2} >
                 <Typography variant="h6">Monthly Summary</Typography>
 

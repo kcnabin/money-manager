@@ -37,6 +37,22 @@ const transactionsSlice = createSlice({
     },
     addExpensesRecords: (state, action) => {
       state.expensesRecords.push(action.payload)
+    },
+    deleteIncomeRecord: (state, action) => {
+      state.incomeRecords = state.incomeRecords.filter(eachRecord => eachRecord.id !== action.payload)
+    },
+    deleteExpensesRecord: (state, action) => {
+      state.expensesRecords = state.expensesRecords.filter(eachRecord => eachRecord.id !== action.payload)
+    },
+    updateIncomeRecords: (state, action) => {
+      state.incomeRecords = state.incomeRecords.map(eachRecord => 
+        eachRecord.id !== action.payload.id ? eachRecord : action.payload
+      )
+    },
+    updateExpensesRecord: (state, action) => {
+      state.expensesRecords = state.expensesRecords.map(eachRecord => 
+        eachRecord.id !== action.payload.id ? eachRecord : action.payload
+      )
     }
   },
   extraReducers: (builder) => {
@@ -62,4 +78,4 @@ const transactionsSlice = createSlice({
 })
 
 export default transactionsSlice.reducer
-export const { addToIncomeList, addToExpensesList, addIncomeRecords, addExpensesRecords } = transactionsSlice.actions
+export const {updateIncomeRecords, updateExpensesRecord, addToIncomeList, addToExpensesList, addIncomeRecords, addExpensesRecords, deleteExpensesRecord, deleteIncomeRecord } = transactionsSlice.actions

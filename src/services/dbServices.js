@@ -42,3 +42,20 @@ export const addNewExpenses = async (newExpenses) => {
   const savedNewExpenses = await axios.post(expensesListUrl, {name: newExpenses, id: uuidv4()})
   return savedNewExpenses.data.name
 }
+
+export const updateRecord = async (updatedRecord) => {
+  const newUrl = updatedRecord.category.toLowerCase() === 'income'
+    ? `${incomeRecordsUrl}/${updatedRecord.id}`
+    : `${expensesRecordUrl}/${updatedRecord.id}`
+  const returnedRecord = await axios.put(newUrl, updatedRecord)
+
+  return returnedRecord.data
+}
+
+export const deleteRecord = async (id, category) => {
+  const newUrl = category.toLowerCase() === 'income'
+    ? `${incomeRecordsUrl}/${id}`
+    : `${expensesRecordUrl}/${id}`
+
+  await axios.delete(newUrl)
+}

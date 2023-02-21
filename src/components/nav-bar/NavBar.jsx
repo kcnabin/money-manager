@@ -15,7 +15,7 @@ const NavBar = () => {
     return (
         <AppBar position='static' sx={{bgcolor: 'info.dark'}}>
             <Toolbar>
-                <IconButton color='inherit' size='large'>
+                <IconButton color='inherit' size='large' onClick={() => navigate('/')}>
                     <MonetizationOnIcon />
                 </IconButton>
                 <Typography variant='body1' sx={{flexGrow: 1}}>
@@ -38,9 +38,6 @@ const NavBar = () => {
                         }
                     }}
                 >
-                    <NavLink to='/'>
-                        <Typography variant='body1'>Home</Typography>
-                    </NavLink>
                     <NavLink to='/add'>
                         <Typography variant='body1'>Record Transactions</Typography>
                     </NavLink>
@@ -67,14 +64,6 @@ const NavBar = () => {
                     open={openMenu}
                     onClose={closeMenu}
                 >
-                    <MenuItem>
-                        <Button onClick={() => {
-                            closeMenu()
-                            navigate('/')
-                        }}>
-                            <Typography variant='body2'>Home</Typography>
-                        </Button>
-                    </MenuItem>
                     <MenuItem>
                         <Button onClick={() => {
                             closeMenu()

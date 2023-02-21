@@ -10,8 +10,10 @@ import Home from './components/home/Home'
 import Summary from './components/summary/Summary'
 import AddIncomeExpenses from './components/add-income-expenses/AddIncomeExpenses'
 import SubCategorySummary from './components/subcatSummary/SubCategorySummary'
+import EditRecord from './components/editRecord/EditRecord'
 import { useDispatch } from 'react-redux'
 import { fetchInitialData } from './features/records/transactionsSlice'
+import Footer from './components/footer/Footer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -26,16 +28,19 @@ const App = () => {
       <NavBar />
 
       <Routes>
-        <Route index element={<Home />} />
+        <Route index element={<Summary />} />
         <Route path='/' element={<Home />} />
         <Route 
-          path='add' 
+          path='/add' 
           element={<AddIncomeExpenses />} 
         />
-        <Route path='summary' element={<Summary />} />
+        <Route path='/summary' element={<Summary />} />
         <Route path='/categorySummary' element={<SubCategorySummary />} />
+        <Route path='/editRecord' element={<EditRecord />} />
         
       </Routes>
+
+      <Footer />
 
     </Stack>
     </LocalizationProvider>
