@@ -53,18 +53,6 @@
   ],
   "incomeRecords": [
     {
-      "id": "1",
-      "dateAdded": {
-        "year": 2023,
-        "month": 2,
-        "day": 10
-      },
-      "category": "income",
-      "subCategory": "interest",
-      "title": "from FD",
-      "amount": 1500
-    },
-    {
       "id": "3",
       "dateAdded": {
         "year": 2023,

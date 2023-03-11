@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 
-const incomeListUrl = 'http://localhost:3001/incomeList'
-const expensesListUrl = 'http://localhost:3001/expensesList'
-const incomeRecordsUrl = 'http://localhost:3001/incomeRecords'
-const expensesRecordUrl = 'http://localhost:3001/expensesRecords'
+const incomeListUrl = 'http://localhost:3001/api/incomeList'
+const expensesListUrl = 'http://localhost:3001/api/expensesList'
+const incomeRecordsUrl = 'http://localhost:3001/api/incomeRecords'
+const expensesRecordUrl = 'http://localhost:3001/api/expensesRecords'
 
 export const getInitialData = async () => {
   const incomeRecords = await axios.get(incomeRecordsUrl)
@@ -47,7 +47,7 @@ export const updateRecord = async (updatedRecord) => {
   const newUrl = updatedRecord.category.toLowerCase() === 'income'
     ? `${incomeRecordsUrl}/${updatedRecord.id}`
     : `${expensesRecordUrl}/${updatedRecord.id}`
-  const returnedRecord = await axios.put(newUrl, updatedRecord)
+  const returnedRecord = await axios.patch(newUrl, updatedRecord)
 
   return returnedRecord.data
 }

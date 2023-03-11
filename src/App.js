@@ -18,7 +18,7 @@ import Footer from './components/footer/Footer'
 const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchInitialData())
+      dispatch(fetchInitialData())
   }, [dispatch])
 
   return (

@@ -10,15 +10,14 @@ const initialState = {
   error: ''
 }
 
+
 export const fetchInitialData = createAsyncThunk('transactions/fetchInitialData', async () => {
   try {
     const fetchedData = await getInitialData()
-    if (fetchedData) {
-      return fetchedData
-    }
+    return fetchedData
   } catch (e) {
-    console.log('Error fetching initial data')
     console.log(e)
+    alert('Failed to load initial data')
   }
 })
 
@@ -27,32 +26,32 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {
     addToIncomeList: (state, action) => {
-      state.incomeList.push(action.payload)
+      return {...state, incomeList: [...state.incomeList, action.payload] }
     },
     addToExpensesList: (state, action) => {
-      state.expensesList.push(action.payload)
+      return {...state, expensesList: [...state.expensesList, action.payload]}
     },
     addIncomeRecords: (state, action) => {
-      state.incomeRecords.push(action.payload)
+      return {...state, incomeRecords: [...state.incomeRecords, action.payload]}
     },
     addExpensesRecords: (state, action) => {
-      state.expensesRecords.push(action.payload)
+      return {...state, expensesRecords: [...state.expensesRecords, action.payload]}
     },
     deleteIncomeRecord: (state, action) => {
-      state.incomeRecords = state.incomeRecords.filter(eachRecord => eachRecord.id !== action.payload)
+      return {...state, incomeRecords : state.incomeRecords.filter(eachRecord => eachRecord.id !== action.payload)}
     },
     deleteExpensesRecord: (state, action) => {
-      state.expensesRecords = state.expensesRecords.filter(eachRecord => eachRecord.id !== action.payload)
+      return {...state, expensesRecords: state.expensesRecords.filter(eachRecord => eachRecord.id !== action.payload) }
     },
     updateIncomeRecords: (state, action) => {
-      state.incomeRecords = state.incomeRecords.map(eachRecord => 
-        eachRecord.id !== action.payload.id ? eachRecord : action.payload
-      )
+      return {
+        ...state, incomeRecords: state.incomeRecords.map(eachRecord => eachRecord.id !== action.payload.id ? eachRecord : action.payload)
+      }
     },
     updateExpensesRecord: (state, action) => {
-      state.expensesRecords = state.expensesRecords.map(eachRecord => 
-        eachRecord.id !== action.payload.id ? eachRecord : action.payload
-      )
+      return {
+        ...state, expensesRecords: state.expensesRecords.map(eachRecord => eachRecord.id !== action.payload.id ? eachRecord : action.payload)
+      }
     }
   },
   extraReducers: (builder) => {
