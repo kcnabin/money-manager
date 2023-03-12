@@ -105,7 +105,7 @@ const AddIncomeExpenses = () => {
     <Stack>
       <DisplayMessage msg={msg} />
       <Stack spacing={2} sx={{
-          maxWidth: '500px',
+          
           padding: '0 32px 32px'
         }} 
       >

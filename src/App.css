@@ -9,24 +9,5 @@ a, a:visited, a:hover, a:active {
 }
 
 .main-routes .active {
-    color: #d4d6d5;
-    /* text-decoration: underline; */
-    border-bottom: 2px solid grey;
+    color: #d1d1d1
 }
-
-/* #root {
-    padding: 0 5%;
-    display: flex;
-    justify-content: center;
-} */
-
-/* #root > div {
-    padding:  0 24px;
-
-} */
-
-/* .main-routes a {
-    text-decoration: none;
-}
-
- */
