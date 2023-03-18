@@ -2,7 +2,7 @@ import { Typography, Stack, Link } from "@mui/material";
 
 const Footer = () => {
   return (
-    <Stack>
+    <Stack className="footer">
       <Typography 
         variant="body1"
         sx={{
@@ -20,7 +20,7 @@ const Footer = () => {
           rel="noopener"
           underline="none"
           sx={{paddingLeft: '6px', '&:hover': {color: '#f04d29'}}}
-          >Nabin </Link>
+          >Nabin</Link>
           
       </Typography>
     </Stack>

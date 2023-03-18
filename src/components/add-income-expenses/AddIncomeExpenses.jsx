@@ -12,11 +12,11 @@ import DisplayMessage from './components/DisplayMessage'
 import { useDispatch } from 'react-redux'
 import { addIncomeRecords, addExpensesRecords } from '../../features/records/transactionsSlice'
 import AddTitle from './components/AddTitle'
-import { v4 as uuidv4 } from 'uuid'
 import { saveIncome, saveExpenses } from '../../services/dbServices'
 
 const AddIncomeExpenses = () => {
   const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
 
   const [selectedDate, setSelectedDate] = useState(null)
   const [category, setCategory] = useState('')
@@ -70,13 +70,12 @@ const AddIncomeExpenses = () => {
       category,
       subCategory: subCategory.toLowerCase(),
       title,
-      amount,
-      id: uuidv4()
+      amount
     }
 
-    if (category === 'income') {
+    if (category.toLowerCase() === 'income') {
       try {
-        const savedRecord = await saveIncome(newRecord)
+        const savedRecord = await saveIncome(newRecord, token)
         dispatch(addIncomeRecords(savedRecord))
       } catch (e) {
         console.log(e)
@@ -85,7 +84,7 @@ const AddIncomeExpenses = () => {
       }
     } else if (category === 'expenses') {
       try {
-        const savedRecord = await saveExpenses(newRecord)
+        const savedRecord = await saveExpenses(newRecord, token)
         dispatch(addExpensesRecords(savedRecord))
       } catch (e) {
         console.log(e)

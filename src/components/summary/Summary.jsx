@@ -3,8 +3,12 @@ import { useSelector } from 'react-redux'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useState } from 'react'
 import DisplayAccordion from "./DisplayAccordion"
+// import { useDispatch } from "react-redux"
+// import { fetchInitialData } from "../../features/records/transactionsSlice"
 
-const Summary = () => {
+const Summary = ({ user, token }) => {
+
+
     const checkForMonthMatch = (dateAdded, displayDate) => {
         if ((dateAdded.year === displayDate.getFullYear()) &&
              (dateAdded.month === (displayDate.getMonth() + 1))       

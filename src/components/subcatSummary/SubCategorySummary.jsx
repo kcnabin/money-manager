@@ -11,6 +11,7 @@ const SubCategorySummary = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { state } = useLocation();
+  const token = localStorage.getItem('token')
 
   console.log(state)
 
@@ -20,7 +21,7 @@ const SubCategorySummary = () => {
     }
 
     try {
-      await deleteRecord(id, category)
+      await deleteRecord(id, category, token)
       if (category.toLowerCase() === 'income') {
         dispatch(deleteIncomeRecord(id))
       } else {

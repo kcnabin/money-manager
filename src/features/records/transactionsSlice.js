@@ -11,14 +11,10 @@ const initialState = {
 }
 
 
-export const fetchInitialData = createAsyncThunk('transactions/fetchInitialData', async () => {
-  try {
-    const fetchedData = await getInitialData()
+export const fetchInitialData = createAsyncThunk('transactions/fetchInitialData', async (id) => {
+    const fetchedData = await getInitialData(id)
+    console.log('fetchedData', fetchedData)
     return fetchedData
-  } catch (e) {
-    console.log(e)
-    alert('Failed to load initial data')
-  }
 })
 
 const transactionsSlice = createSlice({
@@ -64,6 +60,8 @@ const transactionsSlice = createSlice({
     builder.addCase(fetchInitialData.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message
+      state.incomeList = ['Salary', 'Interest', 'Allowances']
+      state.expensesList = ['Rent', 'Food', 'Vehicle']
     })
     builder.addCase(fetchInitialData.fulfilled, (state, action) => {
       state.loading = false

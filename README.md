@@ -1,23 +1,18 @@
-Money Manager - Best Way to keep track of your money
+Money Manager - Best Way to keep track of your money. Frontend for MERN Project
 
-Made using ReactJS & MUI.
+Created using ReactJS, MUI & Redux Toolkit.
+
+-- React Router is used to navigate between sections.
+-- Redux Toolkit is used to manage important states.
+-- Backend is built using ExpressJS & MongoDB.
 
 Source Code: https://kcnabin.github.io/money-manager/
-Live Site: https://kcnabin.github.io/money-manager
 
-React Router is used to navigate between sections.
-Redux Toolkit is used to manage important states.
-JSON-Server is used to save data to db.json
+Source Code for Backend: https://github.com/kcnabin/money-manager-backend
+Token based user authentication is implemented as well.
 
 Scripts:
-1) 'npm run dev'
-start the app & start json-server
-
-2) 'npm start'
-start the app
-
-3) 'npm run server'
-start json-server
+1) 'npm start'  start the app
 
 
 

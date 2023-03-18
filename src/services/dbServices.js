@@ -4,32 +4,41 @@ import { v4 as uuidv4 } from 'uuid'
 const incomeListUrl = 'http://localhost:3001/api/incomeList'
 const expensesListUrl = 'http://localhost:3001/api/expensesList'
 const incomeRecordsUrl = 'http://localhost:3001/api/incomeRecords'
-const expensesRecordUrl = 'http://localhost:3001/api/expensesRecords'
+const expensesRecordsUrl = 'http://localhost:3001/api/expensesRecords'
 
-export const getInitialData = async () => {
-  const incomeRecords = await axios.get(incomeRecordsUrl)
-  const expensesRecords = await axios.get(expensesRecordUrl)
+export const getInitialData = async (id) => {
+  const incomeRecords = await axios.get(`${incomeRecordsUrl}/${id}`)
+  const expensesRecords = await axios.get(`${expensesRecordsUrl}/${id}`)
   const incomeList = await axios.get(incomeListUrl)
   const expensesList = await axios.get(expensesListUrl)
 
   const newIncomeList = incomeList.data.map(eachIncome => eachIncome.name)
   const newExpensesList = expensesList.data.map(eachExpense => eachExpense.name)
 
-  return {
-    incomeRecords: incomeRecords.data,
-    expensesRecords: expensesRecords.data,
+  const dataFromDB = {
     incomeList: newIncomeList,
-    expensesList: newExpensesList
+    expensesList: newExpensesList,
+    incomeRecords: incomeRecords.data,
+    expensesRecords: expensesRecords.data
+  }
+  console.log('db services', dataFromDB)
+  return dataFromDB
+}
+
+const getConfig = (token) => {
+  console.log('Token: ', token)
+  return {
+    headers: {Authorization: token}
   }
 }
 
-export const saveIncome = async (newIncome) => {
-  const savedIncome = await axios.post(incomeRecordsUrl, newIncome)
+export const saveIncome = async (newIncome, token) => {
+  const savedIncome = await axios.post(incomeRecordsUrl, newIncome, getConfig(token))
   return savedIncome.data
 }
 
-export const saveExpenses = async (newExpenses) => {
-  const savedExpenses = await axios.post(expensesRecordUrl, newExpenses)
+export const saveExpenses = async (newExpenses, token) => {
+  const savedExpenses = await axios.post(expensesRecordsUrl, newExpenses, getConfig(token))
   return savedExpenses.data
 }
 
@@ -46,16 +55,16 @@ export const addNewExpenses = async (newExpenses) => {
 export const updateRecord = async (updatedRecord) => {
   const newUrl = updatedRecord.category.toLowerCase() === 'income'
     ? `${incomeRecordsUrl}/${updatedRecord.id}`
-    : `${expensesRecordUrl}/${updatedRecord.id}`
+    : `${expensesRecordsUrl}/${updatedRecord.id}`
   const returnedRecord = await axios.patch(newUrl, updatedRecord)
 
   return returnedRecord.data
 }
 
-export const deleteRecord = async (id, category) => {
+export const deleteRecord = async (id, category, token) => {
   const newUrl = category.toLowerCase() === 'income'
     ? `${incomeRecordsUrl}/${id}`
-    : `${expensesRecordUrl}/${id}`
+    : `${expensesRecordsUrl}/${id}`
 
   await axios.delete(newUrl)
 }

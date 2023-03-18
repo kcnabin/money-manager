@@ -4,11 +4,15 @@ import { useNavigate } from "react-router-dom";
 const LoggedUserInfo = ({ user, setUser }) => {
   const navigate = useNavigate()
 
+  const logOutUser = () => {
+    navigate('/')
+    setUser(null)
+    localStorage.clear()
+    console.log('user logged out!')
+  }
+
   if (user) {
-    const logOutUser = () => {
-      navigate('/')
-      setUser(null)
-    }
+    
     return (
       <Stack direction='row' sx={{alignItems: 'center', padding: '0 32px'}}>
         <Typography variant="body1">
